@@ -46,9 +46,9 @@
     This means you will need to do a Get-ADUser on the SamAccountName property
     to get additional details or return the actual ADUser object.
 
-    PS C:\> Get-AddsMatchingUsers "Smith, John E" | %{ Get-ADUser $_.samaccountname }
+    PS C:\> Get-ADMatchingUsers "Smith, John E" | %{ Get-ADUser $_.samaccountname }
 #>
-function Get-AddsMatchingUsers {
+function Get-ADMatchingUsers {
     [CmdletBinding(DefaultParameterSetName='Name')]
     param (
         [Parameter(ValueFromPipelineByPropertyName,ParameterSetName='FirstLastInitials')]
@@ -127,9 +127,9 @@ function Get-AddsMatchingUsers {
         return $user
     }
 
-    # If a Nmae string was supplied, parse it using the Get-AddsFirstLastInitials function
+    # If a Name string was supplied, parse it using the Get-FirstLastInitials function
     if ($Name){
-        $parsedName = Get-AddsFirstLastInitials $Name
+        $parsedName = Get-FirstLastInitials $Name
         
         $firstName = $parsedName.FirstName
         $lastName = $parsedName.LastName
